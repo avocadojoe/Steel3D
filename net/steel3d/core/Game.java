@@ -16,12 +16,20 @@ import org.lwjgl.util.glu.GLU;
  * steel 3d is an open-source java game engine
  * work in progress
  * 
- * TODO
- * add collision
- *
  */
 public abstract class Game {
 
+	/**
+	 * the view distance Note: will only work if initialized inside the constructor
+	 */
+	public float viewDistance = 1000;
+	
+	/**
+	 * the FOV Note: will only work if initialized inside the constructor
+	 */
+	public float fov = 45;
+
+	
 	/**
 	 * the title of the game
 	 */
@@ -83,7 +91,7 @@ public abstract class Game {
         GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glMatrixMode(GL11.GL_PROJECTION); 
 		GL11.glLoadIdentity();
-		GLU.gluPerspective(45.0f, ((float) width / (float) height), 2.0f, 1000.0f); // Calculate The Aspect Ratio Of The Window
+		GLU.gluPerspective(fov, ((float) width / (float) height), 2.0f, viewDistance); // Calculate The Aspect Ratio Of The Window
 		GL11.glMatrixMode(GL11.GL_MODELVIEW); 
 
 		GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f); 
