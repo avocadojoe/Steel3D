@@ -8,3 +8,11 @@ http://legacy.lwjgl.org/
 and slick util:
 http://slick.ninjacave.com/slick-util/
 
+
+setup:
+import three jar files:
+lwjgl-util.jar
+slick-util.jar
+lwjgl.jar
+
+for lwjgl.jar, set the native library folder to the current platform
