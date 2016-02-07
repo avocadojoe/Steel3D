@@ -1,6 +1,9 @@
 package net.steel3d.examples;
 
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.util.vector.Vector3f;
@@ -8,7 +11,9 @@ import org.newdawn.slick.opengl.Texture;
 
 import net.steel3d.core.Game;
 import net.steel3d.graphics.Graphics;
+import net.steel3d.graphics.Mesh;
 import net.steel3d.util.ImageLoader;
+import net.steel3d.util.ModelLoader;
 
 /**
  * 
@@ -17,6 +22,7 @@ import net.steel3d.util.ImageLoader;
  */
 public class Example extends Game{
 
+	public Mesh mesh;
 
 	public Example() {
 		super("Example Program",//project name
@@ -34,7 +40,13 @@ public class Example extends Game{
 	 */
 	public void init() {	
 		sand = ImageLoader.loadImage("net/steel3d/examples/sand.png");
-		
+		try {
+			mesh = ModelLoader.loadModel(getClass(), "/net/steel3d/examples/test.obj");
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -52,7 +64,7 @@ public class Example extends Game{
 	}
 	
 	/**
-	 * define a Graphics instance (net.torchlight3d.graphics.Graphics)
+	 * define a Graphics instance (net.steel3d.graphics.Graphics)
 	 */
 	public Graphics g = new Graphics();
 	
@@ -68,9 +80,10 @@ public class Example extends Game{
 
 		g.rotateY(yrot);
 		
-		g.translate(new Vector3f(0,-6,0));
+		g.translate(new Vector3f(0,0,-6));
 		
-		g.drawTexturedCube(0,0, 0, 1, 1, 1, sand);
+		g.drawModel(0, 0,0, mesh);
+	
 	}
 
 
